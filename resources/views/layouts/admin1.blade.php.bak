@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@yield('title', "Admin - S'Spotlight")</title>
+
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+</head>
+
+<body>
+
+<div class="admin-layout">
+
+    @include('admin.partials.sidebar')
+
+    <div class="admin-content-wrapper">
+
+        <!-- TOPBAR (mobile hamburger) -->
+        <div class="mobile-topbar">
+
+            <button type="button" class="hamburger-btn" id="sidebarToggle" aria-label="Buka menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="mobile-topbar-logo">S'<span>Spotlight</span></div>
+
+        </div>
+
+        <main class="admin-main">
+            @yield('content')
+        </main>
+
+    </div>
+
+</div>
+
+<script src="{{ asset('js/admin.js') }}"></script>
+
+@yield('scripts')
+
+</body>
+</html>
