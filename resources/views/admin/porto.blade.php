@@ -185,7 +185,7 @@
                         Edit
                     </a>
 
-                    <form action="{{ route('admin.porto.destroy', $portofolio->id_portofolio) }}" method="POST" onsubmit="return confirm('Mau di hapus perasaan nya?');">
+                    <form action="{{ route('admin.porto.destroy', $portofolio->id_portofolio) }}" method="POST" onsubmit="return confirm('Yakin menghapus ini?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn-delete">Hapus</button>

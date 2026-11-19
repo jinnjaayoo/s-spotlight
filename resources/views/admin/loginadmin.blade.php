@@ -46,7 +46,8 @@
                 </p>
 
 
-                @if ($errors->any())
+                {{-- Gagal login (kredensial salah) ditampilkan lewat toast; error validasi tetap inline --}}
+                @if ($errors->any() && !session('toast_error'))
                     <div class="form-error">
                         {{ $errors->first() }}
                     </div>
@@ -106,6 +107,8 @@
         </div>
 
     </div>
+
+    @include('partials.toast')
 
 </body>
 </html>

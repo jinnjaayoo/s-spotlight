@@ -23,13 +23,20 @@ class Portofolio extends Model
     protected $primaryKey = 'id_portofolio';
 
     protected $fillable = [
-    'nama_portofolio',
-    'deskripsi',
-    'kategori',
-    'teknologi',
-    'link_portofolio',
-    'gambar',
-    'nama_siswa',
-];
+        'nama_portofolio',
+        'deskripsi',
+        'kategori',
+        'teknologi',
+        'link_portofolio',
+        'gambar',
+        'nama_siswa',
+    ];
 
+    /**
+     * Relasi ke pengajuan karya jika portofolio ini berasal dari pengajuan siswa.
+     */
+    public function pengajuan()
+    {
+        return $this->hasOne(PengumpulanKarya::class, 'id_portofolio', 'id_portofolio');
+    }
 }

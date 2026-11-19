@@ -40,7 +40,21 @@
 
     <section class="dashboard-content">
 
-
+        <!-- NOTIFIKASI PENGAJUAN BARU -->
+        @if ($totalPending > 0)
+            <div class="pending-alert-banner animate-on-scroll">
+                <div class="alert-icon-wrap">
+                    <span class="alert-bell">🔔</span>
+                </div>
+                <div class="alert-body">
+                    <h4>{{ $totalPending }} Pengajuan Karya Menunggu Peninjauan</h4>
+                    <p>Ada pengajuan karya siswa baru yang belum ditinjau. Silakan periksa untuk memberikan persetujuan atau penolakan.</p>
+                </div>
+                <a href="{{ route('admin.pengajuan.index', ['status' => 'pending']) }}" class="btn-review-now">
+                    Tinjau Sekarang &rarr;
+                </a>
+            </div>
+        @endif
 
         <!-- STATISTIK -->
 
@@ -84,6 +98,25 @@
                 <div class="stat-info">
                     <p>Info Umum</p>
                     <h2>{{ $totalInfo }}</h2>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card animate-on-scroll">
+
+                <div class="stat-icon" style="background: rgba(217, 165, 38, 0.15);">
+                    <img src="{{ asset('images/pkarya.svg') }}" alt="Pengajuan Siswa">
+                </div>
+
+                <div class="stat-info">
+                    <p>Pengajuan Siswa</p>
+                    <h2>{{ $totalPengajuan }}</h2>
+                    @if ($totalPending > 0)
+                        <span class="stat-badge-pending">{{ $totalPending }} Menunggu</span>
+                    @else
+                        <span class="stat-badge-ok">Tertinjau</span>
+                    @endif
                 </div>
 
             </div>

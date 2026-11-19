@@ -280,6 +280,8 @@
 
     @stack('scripts')
 
+    @include('partials.toast')
+
     <script>
     (function () {
         const menuButton = document.getElementById('mobile-menu-button');

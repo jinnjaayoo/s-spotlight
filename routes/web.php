@@ -1,15 +1,18 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\DataPekaryaController as AdminDataPekaryaController;
 use App\Http\Controllers\Admin\GaleriController as AdminGaleriController;
 use App\Http\Controllers\Admin\InfoController as AdminInfoController;
 use App\Http\Controllers\Admin\LoginadminController;
+use App\Http\Controllers\Admin\PengajuanKaryaController as AdminPengajuanKaryaController;
 use App\Http\Controllers\Admin\PortofolioController as AdminPortofolioController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\GaleriController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\InfoController;
+use App\Http\Controllers\User\PengumpulanKaryaController;
 use App\Http\Controllers\User\PortofolioController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +56,18 @@ Route::get('/user/informasi/{id}', [InfoController::class, 'show'])
 Route::get('/user/profil', function () {
     return view('user.profil.index');
 })->name('user.profil');
+
+// FORMULIR PENGAJUAN KARYA SISWA (publik)
+Route::get('/user/pengajuan', [PengumpulanKaryaController::class, 'create'])
+    ->name('user.pengajuan');
+
+Route::get('/user/pengajuan/sukses', [PengumpulanKaryaController::class, 'success'])
+    ->name('user.pengajuan.sukses');
+
+Route::post('/user/pengajuan', [PengumpulanKaryaController::class, 'store'])
+    ->middleware('throttle:5,1')
+    ->name('user.pengajuan.store');
+
 /*
 |--------------------------------------------------------------------------
 | ADMIN S'SPOTLIGHT
@@ -60,7 +75,7 @@ Route::get('/user/profil', function () {
 */
 
 // LOGIN ADMIN (guest only)
-Route::middleware('guest:admin')->group(function () {
+Route::middleware('guest:admin')->group(function () { //akses hal login untuk pengunjung yang belum login
     Route::get('/admin/login', [LoginadminController::class, 'showLoginForm'])
         ->name('admin.login');
 
@@ -68,8 +83,8 @@ Route::middleware('guest:admin')->group(function () {
         ->name('admin.login.submit');
 });
 
-Route::post('/admin/logout', [LoginadminController::class, 'logout'])
-    ->middleware('auth:admin')
+Route::post('/admin/logout', [LoginadminController::class, 'logout']) // route admin logout
+    ->middleware('auth:admin')  // melindungi halaman dashboard dan fitur admin
     ->name('admin.logout');
 
 // SEMUA HALAMAN ADMIN LAINNYA WAJIB LOGIN SEBAGAI ADMIN
@@ -78,6 +93,35 @@ Route::middleware('auth:admin')->group(function () {
     // DASHBOARD
     Route::get('/admin/dash', [DashboardController::class, 'index'])
         ->name('admin.dasbor');
+
+    // PENGAJUAN KARYA SISWA
+    Route::get('/admin/pengajuan', [AdminPengajuanKaryaController::class, 'index'])
+        ->name('admin.pengajuan.index');
+
+    Route::get('/admin/pengajuan/{id}', [AdminPengajuanKaryaController::class, 'show'])
+        ->name('admin.pengajuan.show');
+
+    Route::put('/admin/pengajuan/{id}/status', [AdminPengajuanKaryaController::class, 'updateStatus'])
+        ->name('admin.pengajuan.status');
+
+    Route::get('/admin/pengajuan/{id}/download', [AdminPengajuanKaryaController::class, 'downloadGambar'])
+        ->name('admin.pengajuan.download');
+
+    Route::post('/admin/pengajuan/{id}/publish', [AdminPengajuanKaryaController::class, 'publish'])
+        ->name('admin.pengajuan.publish');
+
+    Route::post('/admin/pengajuan/{id}/unpublish', [AdminPengajuanKaryaController::class, 'unpublish'])
+        ->name('admin.pengajuan.unpublish');
+
+    Route::delete('/admin/pengajuan/{id}', [AdminPengajuanKaryaController::class, 'destroy'])
+        ->name('admin.pengajuan.destroy');
+
+    // DATA PEKARYA
+    Route::get('/admin/pekarya', [AdminDataPekaryaController::class, 'index'])
+        ->name('admin.pekarya.index');
+
+    Route::get('/admin/pekarya/export', [AdminDataPekaryaController::class, 'export'])
+        ->name('admin.pekarya.export');
 
     // PORTOFOLIO
     Route::get('/admin/porto', [AdminPortofolioController::class, 'index'])

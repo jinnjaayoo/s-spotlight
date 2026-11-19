@@ -119,6 +119,12 @@ class PortofolioController extends Controller
             unlink(public_path('image/' . $portofolio->gambar));
         }
 
+        // Sinkronkan status publikasi pada pengajuan siswa jika berasal dari pengajuan karya
+        \App\Models\PengumpulanKarya::where('id_portofolio', $id)->update([
+            'status_publikasi' => 'belum_dipublikasi',
+            'id_portofolio' => null,
+        ]);
+
         $portofolio->delete();
 
         return redirect()->route('admin.porto')->with('success', 'Portofolio berhasil dihapus.');

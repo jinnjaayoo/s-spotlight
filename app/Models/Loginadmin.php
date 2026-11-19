@@ -9,22 +9,22 @@ class Loginadmin extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'admins';
+    protected $table = 'admins';  // sumber data akun
 
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'password',     
         'foto',
         'keterangan',
     ];
 
-    protected $hidden = [
+    protected $hidden = [  // pass dan remember token di sembunyikan dari representasi model
         'password',
         'remember_token',
     ];
 
-    protected $casts = [
+    protected $casts = [  // pass menggunakan hashing
         'password' => 'hashed',
     ];
 }

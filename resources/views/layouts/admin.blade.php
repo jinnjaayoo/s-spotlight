@@ -51,5 +51,7 @@
 @yield('scripts')
 @stack('scripts')
 
+@include('partials.toast')
+
 </body>
 </html>

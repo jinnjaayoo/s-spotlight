@@ -146,7 +146,7 @@
                         <span>Lihat Karya</span>
                         <span class="material-symbols-outlined text-sm">arrow_outward</span>
                     </a>
-
+    
                     <!-- Hamburger Button -->
                     <button id="mobile-menu-btn" type="button" class="md:hidden p-2.5 rounded-xl bg-warm-beige-light border border-warm-beige text-brand-dark hover:bg-warm-beige transition-colors" aria-label="Buka Menu" aria-expanded="false">
                         <span class="material-symbols-outlined text-2xl" id="menu-icon">menu</span>
@@ -197,7 +197,7 @@
             
             <!-- Tagline Pill -->
             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-butter-gold-100 border border-butter-gold-300/80 text-butter-gold-800 text-xs font-bold tracking-wider uppercase mb-6 shadow-sm">
-                <span class="w-2 h-2 rounded-full bg-butter-gold-500 animate-ping"></span>
+                <span class="w-2 h-2 rounded-full bg-butter-gold-500 animate-ping"></span> 
                 <span class="material-symbols-outlined text-base text-butter-gold-600">stars</span>
                 WADAH APRESIASI KARYA SISWA
             </div>
@@ -225,7 +225,7 @@
                     <span>Jelajahi Karya</span>
                 </a>
 
-                <a href="#" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-white border-2 border-warm-beige text-brand-dark font-semibold text-base hover:bg-warm-beige-light hover:border-butter-gold-300 transition-all">
+                <a href="{{ route('user.pengajuan') }}" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-2xl bg-white border-2 border-warm-beige text-brand-dark font-semibold text-base hover:bg-warm-beige-light hover:border-butter-gold-300 transition-all">
                     <span class="material-symbols-outlined text-xl text-butter-gold-600">add_circle</span>
                     <span>Ajukan Karyamu</span>
                 </a>
@@ -245,10 +245,7 @@
                 <!-- Section Header -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10" data-reveal>
                     <div>
-                        <div class="inline-flex items-center gap-1.5 text-butter-gold-700 text-xs font-bold uppercase tracking-wider mb-2">
-                            <span class="material-symbols-outlined text-sm">grid_view</span>
-                            Showcase Portofolio
-                        </div>
+                       
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">
                             Koleksi Karya Siswa
                         </h2>
@@ -383,10 +380,7 @@
                 <!-- Section Header -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12" data-reveal>
                     <div>
-                        <div class="inline-flex items-center gap-1.5 text-butter-gold-700 text-xs font-bold uppercase tracking-wider mb-2">
-                            <span class="material-symbols-outlined text-sm">photo_library</span>
-                            Dokumentasi Visual
-                        </div>
+                       
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">
                             Momen Sekolah
                         </h2>
@@ -457,10 +451,7 @@
                 <!-- Section Header -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10" data-reveal>
                     <div>
-                        <div class="inline-flex items-center gap-1.5 text-butter-gold-700 text-xs font-bold uppercase tracking-wider mb-2">
-                            <span class="material-symbols-outlined text-sm">campaign</span>
-                            Warta &amp; Kabar
-                        </div>
+                       
                         <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-dark tracking-tight">
                             Info &amp; Pengumuman
                         </h2>

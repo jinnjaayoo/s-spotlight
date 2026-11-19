@@ -20,24 +20,27 @@ class LoginadminController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email' => 'required|email',      //Validation//
             'password' => 'required',
         ]);
 
-        if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {
+        if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember'))) {         //auth proses login
             $request->session()->regenerate();
 
-            return redirect()->intended(route('admin.dasbor'));
+            return redirect()
+                ->intended(route('admin.dasbor'))
+                ->with('toast_success', 'Login berhasil. Selamat datang di dashboard admin.');
         }
 
         return back()
             ->withErrors(['email' => 'Email atau password yang Anda masukkan salah.'])
+            ->with('toast_error', 'Email atau password yang Anda masukkan salah.')
             ->onlyInput('email');
     }
 
     public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
+        Auth::guard('admin')->logout();         // proses logout
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

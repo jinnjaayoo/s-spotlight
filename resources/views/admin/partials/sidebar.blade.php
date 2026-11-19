@@ -22,6 +22,25 @@
             Dashboard
         </a>
 
+        <a href="{{ route('admin.pengajuan.index') }}"
+            class="menu-item menu-item-pengajuan {{ request()->routeIs('admin.pengajuan*') ? 'active' : '' }}">
+            <span class="menu-icon">
+                <img src="{{ asset('images/inbox.svg') }}" alt="Pengajuan Karya">
+            </span>
+            <span class="menu-label">Pengajuan Karya</span>
+
+
+            @if (($pendingSubmissionsCount ?? 0) > 0)
+                <span class="sidebar-pending-badge">{{ $pendingSubmissionsCount }}</span>
+            @endif
+        </a>
+
+        <a href="{{ route('admin.pekarya.index') }}"
+            class="menu-item {{ request()->routeIs('admin.pekarya*') ? 'active' : '' }}">
+            <span><img src="{{ asset('images/pekarya.svg') }}" alt="Data Pekarya"></span>
+            Data Pekarya
+        </a>
+
         <a href="{{ route('admin.porto') }}" class="menu-item {{ request()->routeIs('admin.porto*') ? 'active' : '' }}">
             <span><img src="{{ asset('images/Folder.svg') }}" alt="Portofolio"></span>
             Portofolio

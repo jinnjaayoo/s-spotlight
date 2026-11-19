@@ -74,10 +74,6 @@
                             Pengumuman
                         </option>
 
-                        <option value="Agenda" {{ old('kategori') == 'Agenda' ? 'selected' : '' }}>
-                            Agenda
-                        </option>
-
                     </select>
 
                 </div>

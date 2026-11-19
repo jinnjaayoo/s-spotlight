@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Galeri;
 use App\Models\Info;
+use App\Models\PengumpulanKarya;
 use App\Models\Portofolio;
 
 class DashboardController extends Controller
@@ -30,6 +31,8 @@ class DashboardController extends Controller
         $totalPortofolio = Portofolio::count();
         $totalGaleri = Galeri::count();
         $totalInfo = $infoDashboard()->count();
+        $totalPengajuan = PengumpulanKarya::count();
+        $totalPending = PengumpulanKarya::where('status', 'pending')->count();
 
         $activities = collect();
 
@@ -62,11 +65,27 @@ class DashboardController extends Controller
             ]);
         }
 
+        foreach (PengumpulanKarya::latest('id_pengumpulan')->take(5)->get() as $item) {
+            $activities->push([
+                'icon' => 'pkarya.svg',
+                'title' => 'Pengajuan karya: ' . $item->judul_karya,
+                'description' => $item->nama_siswa . ' (' . $item->kelas . ') — Status: ' . ucfirst($item->status),
+                'time' => $item->created_at,
+            ]);
+        }
+
         $activities = $activities
             ->sortByDesc(fn ($activity) => $activity['time'])
             ->take(8)
             ->values();
 
-        return view('admin.dasbor', compact('totalPortofolio', 'totalGaleri', 'totalInfo', 'activities'));
+        return view('admin.dasbor', compact(
+            'totalPortofolio',
+            'totalGaleri',
+            'totalInfo',
+            'totalPengajuan',
+            'totalPending',
+            'activities'
+        ));
     }
 }
